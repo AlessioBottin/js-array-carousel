@@ -88,7 +88,7 @@ a {
 .single-thumbnail {
     width: 100%;
     height: 20%;
-    filter: grayscale(1);
+    position: relative;
 }
 
 .single-thumbnail img {
@@ -98,10 +98,21 @@ a {
 }
 
 .single-thumbnail.active {
-    filter: grayscale(0);
     border: 2px solid white;
 }
 
+.overlay {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.single-thumbnail.active .overlay {
+    display: none;
+}
 /* Arrow  */
 .arrow {
     position: absolute;
@@ -114,6 +125,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 .arrow.up {
