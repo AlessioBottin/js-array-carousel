@@ -23,16 +23,16 @@ const text = [
 ]
 
 
-// MILESTONE 2
-// Adesso rimuoviamo tutto il markup statico e inseriamo le immagini e i testi delle immagini dinamicamente servendoci
-//  dell'array fornito e un semplice ciclo for che concatena un template literal. Al termine di questa fase ci ritroveremo 
-//  con lo stesso slider, ma costruito dinamicamente attraverso JavaScript.
+// MILESTONE 3
+// Al click dell'utente sulle frecce verso l'alto o verso il basso, l'immagine attiva diventa visibile in formato
+// grande a sinistra e nel suo angolo in basso a destra dovranno comparire relativi:
+//  - titolo e
+//  - testo.
+// Allo stesso tempo nelle miniature l'immagine attiva dovrà apparire in evidenza rispetto alle altre.
 
 // Seleziono i contenitori 
 const currentImg = document.querySelector('.current-img');
 const thumbnails = document.querySelector('.thumbnails');
-
-console.log(currentImg);
 
 // Per ogni immagine creo il suo elemento nel html 
 for ( i = 0; i < items.length; i++) {
@@ -67,3 +67,58 @@ for ( i = 0; i < items.length; i++) {
     thumbnails.innerHTML += newThumbnail;
 
 }
+
+// Devo mettere la prima immagine come default 
+let activeImg = 0;
+
+// Creo un array con gli elementi di una classe
+const allImg = document.getElementsByClassName('single-img');
+const allThumbnails = document.getElementsByClassName('single-thumbnail');
+
+// Aggiungo la classe active 
+allImg[activeImg].classList.add('active');
+allThumbnails[activeImg].classList.add('active');
+
+// Seleziono i bottoni 
+const upBtn = document.querySelector('.up');
+const downBtn = document.querySelector('.down');
+
+// Incremento activeImg al click di up 
+upBtn.addEventListener('click', 
+    function () {
+
+        // Rimuovo la classe active dall elemento corrente 
+        allImg[activeImg].classList.remove('active');
+        allThumbnails[activeImg].classList.remove('active');
+
+        if ( activeImg < items.length - 1 ) {
+            activeImg++;
+        } else {
+            activeImg = 0;
+        }
+
+        // Aggiungo la classe active al nuovo elemento 
+        allImg[activeImg].classList.add('active');
+        allThumbnails[activeImg].classList.add('active');
+    }   
+)
+
+// Decremento activeImg al click di down 
+downBtn.addEventListener('click', 
+    function () {
+
+        // Rimuovo la classe active dall elemento corrente 
+        allImg[activeImg].classList.remove('active');
+        allThumbnails[activeImg].classList.remove('active');
+
+        if ( activeImg > 0 ) {
+            activeImg--;
+        } else {
+            activeImg = items.length - 1;
+        }
+
+        // Aggiungo la classe active al nuovo elemento 
+        allImg[activeImg].classList.add('active');
+        allThumbnails[activeImg].classList.add('active');
+    }   
+)
